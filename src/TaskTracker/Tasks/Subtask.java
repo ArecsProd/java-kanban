@@ -1,12 +1,12 @@
 package TaskTracker.Tasks;
 
-import TaskTracker.Statuses;
+import TaskTracker.Status;
 
-public class Subtask extends Epic {
+public class Subtask extends Task {
     int epicId;
-    Statuses status;
+    Status status;
 
-    public Subtask(String name, int id, String description, int epicId, Statuses status) {
+    public Subtask(String name, int id, String description, int epicId, Status status) {
         super(name, id, description);
         this.epicId = epicId;
         this.status = status;
