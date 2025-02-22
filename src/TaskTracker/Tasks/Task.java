@@ -1,12 +1,12 @@
 package TaskTracker.Tasks;
 
-import TaskTracker.Status;
+import TaskTracker.Statuses;
 
 public class Task {
-    public String name; // public - т.к. мне нужен доступ к нему из TaskManager
-    protected final int id;// protected - чтобы вне пакета задач вызывать только через гетер
-    public String description; // были default - потому что к ним не нужен был доступ вне пакета
-    public Status status = Status.NEW;
+    public String name;
+    protected final int id;
+    String description;
+    Statuses status = Statuses.NEW;
 
     public Task(String name, int id, String description) {
         this.name = name;
@@ -14,7 +14,7 @@ public class Task {
         this.description = description;
     }
 
-    public Task(String name, int id, String description, Status status) {
+    public Task(String name, int id, String description, Statuses status) {
         this(name, id, description);
         this.status = status;
     }

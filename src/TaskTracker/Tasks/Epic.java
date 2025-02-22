@@ -1,6 +1,6 @@
 package TaskTracker.Tasks;
 
-import TaskTracker.Status;
+import TaskTracker.Statuses;
 import TaskTracker.TaskManager;
 
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Epic extends Task {
     private List<Integer> subtasks = new ArrayList<>();
-    private List<Status> statuses = new ArrayList<>();
+    private List<Statuses> statuses = new ArrayList<>();
 
     public Epic(String name, int id, String description) {
         super(name, id, description);
-        status = Status.NEW;
+        status = Statuses.NEW;
     }
 
     public void setSubtask(Integer id) {
@@ -36,36 +36,20 @@ public class Epic extends Task {
     }
 
     private void updateStatus() {
-        if (subtasks.isEmpty()) {
-            status = Status.NEW;
-            return;
-        }
-        status = TaskManager.subtaskMap.get(subtasks.getFirst()).status;
-        for (int subtaskId : subtasks) {
-            switch (status) {
-                case NEW:
-                    if (TaskManager.subtaskMap.get(subtaskId).status != Status.NEW) {
-                        status = Status.IN_PROGRESS;
-                        return;
-                    }
-                    break;
-                case DONE:
-                    if (TaskManager.subtaskMap.get(subtaskId).status != Status.DONE) {
-                        status = Status.IN_PROGRESS;
-                        return;
-                    }
-                    break;
-                default:
-                    status = Status.IN_PROGRESS;
-            }
+        if (statuses.isEmpty() || (!statuses.contains(Statuses.DONE) && !statuses.contains(Statuses.IN_PROGRESS))) {
+            status = Statuses.NEW;
+        } else if (!statuses.contains(Statuses.NEW) && !statuses.contains(Statuses.IN_PROGRESS)){
+            status = Statuses.DONE;
+        } else {
+            status = Statuses.IN_PROGRESS;
         }
     }
 
-    public List<Status> getStatus() {
+    public List<Statuses> getStatuses() {
         return statuses;
     }
 
-    public void setStatuses(List<Status> statuses) {
+    public void setStatuses(List<Statuses> statuses) {
         this.statuses = statuses;
     }
 
@@ -81,7 +65,7 @@ public class Epic extends Task {
             return "\nПодзадач пока нет!";
         } else {
             for (Subtask subtask : TaskManager.subtaskMap.values()) {
-                if (subtasks.contains(subtask.getId())) {
+                if (subtasks.contains(subtask.id)) {
                     subtaskString.append("\n").append(subtask);
                 }
             }
