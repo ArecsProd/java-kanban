@@ -26,17 +26,17 @@ public class TaskManager {
         return -1;
     }
 
-    public void addTask(String name,  String description, Status status) {
+    public void addTask(String name, String description, Status status) {
         int id = generateId();
         taskMap.put(id, new Task(name, id, description, status));
     }
 
-    public void updateTask(String name,  String description, Status status, Integer id) {
+    public void updateTask(String name, String description, Status status, Integer id) {
 
         taskMap.put(id, new Task(name, id, description, status));
     }
 
-    public void updateTask(String name,  String description, Status status, String oldName) {
+    public void updateTask(String name, String description, Status status, String oldName) {
         int id = getTaskIdByName(oldName);
         taskMap.put(id, new Task(name, id, description, status));
     }

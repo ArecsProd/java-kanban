@@ -16,7 +16,7 @@ public class Subtask extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Subtask name - " + name + ", subtask id - " + id + ", Subtask description - " + description
                 + "\nStatus - " + status;
     }
