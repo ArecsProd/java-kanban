@@ -1,8 +1,4 @@
-package TaskTracker;
-
-import TaskTracker.Tasks.Epic;
-import TaskTracker.Tasks.Subtask;
-import TaskTracker.Tasks.Task;
+package taskTracker;
 
 public class Main {
 

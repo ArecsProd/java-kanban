@@ -1,7 +1,7 @@
-package TaskTracker.Tasks;
+package taskTracker.tasks;
 
-import TaskTracker.Status;
-import TaskTracker.TaskManager;
+import taskTracker.Status;
+import taskTracker.TaskManager;
 
 import java.util.ArrayList;
 import java.util.List;
