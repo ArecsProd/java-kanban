@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Epic extends Task {
     private List<Integer> subtasks = new ArrayList<>();
-    private List<Status> statuses = new ArrayList<>();
 
     public Epic(String name, int id, String description) {
         super(name, id, description);
@@ -17,13 +16,11 @@ public class Epic extends Task {
 
     public void setSubtask(Integer id) {
         subtasks.add(id);
-        statuses.add(TaskManager.subtaskMap.get(id).status);
         updateStatus();
     }
 
     public void deleteSubtask(Integer id) {
         subtasks.remove(id);
-        statuses.remove(TaskManager.subtaskMap.get(id).status);
         updateStatus();
     }
 
@@ -40,17 +37,17 @@ public class Epic extends Task {
             status = Status.NEW;
             return;
         }
-        status = TaskManager.subtaskMap.get(subtasks.getFirst()).status;
+        status = TaskManager.getSubtaskMap().get(subtasks.getFirst()).status;
         for (int subtaskId : subtasks) {
             switch (status) {
                 case NEW:
-                    if (TaskManager.subtaskMap.get(subtaskId).status != Status.NEW) {
+                    if (TaskManager.getSubtaskMap().get(subtaskId).status != Status.NEW) {
                         status = Status.IN_PROGRESS;
                         return;
                     }
                     break;
                 case DONE:
-                    if (TaskManager.subtaskMap.get(subtaskId).status != Status.DONE) {
+                    if (TaskManager.getSubtaskMap().get(subtaskId).status != Status.DONE) {
                         status = Status.IN_PROGRESS;
                         return;
                     }
@@ -59,14 +56,6 @@ public class Epic extends Task {
                     status = Status.IN_PROGRESS;
             }
         }
-    }
-
-    public List<Status> getStatus() {
-        return statuses;
-    }
-
-    public void setStatuses(List<Status> statuses) {
-        this.statuses = statuses;
     }
 
     @Override
@@ -80,7 +69,7 @@ public class Epic extends Task {
         if (subtasks.isEmpty()) {
             return "\nПодзадач пока нет!";
         } else {
-            for (Subtask subtask : TaskManager.subtaskMap.values()) {
+            for (Subtask subtask : TaskManager.getSubtaskMap().values()) {
                 if (subtasks.contains(subtask.getId())) {
                     subtaskString.append("\n").append(subtask);
                 }

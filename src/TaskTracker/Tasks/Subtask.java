@@ -3,8 +3,7 @@ package TaskTracker.Tasks;
 import TaskTracker.Status;
 
 public class Subtask extends Task {
-    int epicId;
-    Status status;
+    private final int epicId;
 
     public Subtask(String name, int id, String description, int epicId, Status status) {
         super(name, id, description);
