@@ -1,10 +1,9 @@
-package TaskTracker.Tasks;
+package tasktracker.tasks;
 
-import TaskTracker.Status;
+import tasktracker.Status;
 
 public class Subtask extends Task {
-    int epicId;
-    Status status;
+    private final int epicId;
 
     public Subtask(String name, int id, String description, int epicId, Status status) {
         super(name, id, description);
@@ -17,7 +16,7 @@ public class Subtask extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Subtask name - " + name + ", subtask id - " + id + ", Subtask description - " + description
                 + "\nStatus - " + status;
     }

@@ -1,6 +1,6 @@
-package TaskTracker;
+package tasktracker;
 
-import TaskTracker.Tasks.*;
+import tasktracker.tasks.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,31 +8,35 @@ import java.util.List;
 import java.util.Map;
 
 public class TaskManager {
-    public static Map<Integer, Task> taskMap = new HashMap<>();
-    public static Map<Integer, Epic> epicMap = new HashMap<>();
-    public static Map<Integer, Subtask> subtaskMap = new HashMap<>();
+    private static final Map<Integer, Task> taskMap = new HashMap<>();
+    private static final Map<Integer, Epic> epicMap = new HashMap<>();
+    private static final Map<Integer, Subtask> subtaskMap = new HashMap<>();
     private static int id = 0;
+
+    public static Map<Integer, Task> getTaskMap() {
+        return taskMap;
+    }
 
     public int getTaskIdByName(String name) {
         for (Task task : taskMap.values()) {
-            if (task.name.equals(name)) {
+            if (task.getName().equals(name)) {
                 return task.getId();
             }
         }
         return -1;
     }
 
-    public void addTask(String name,  String description, Status status) {
+    public void addTask(String name, String description, Status status) {
         int id = generateId();
         taskMap.put(id, new Task(name, id, description, status));
     }
 
-    public void updateTask(String name,  String description, Status status, Integer id) {
+    public void updateTask(String name, String description, Status status, Integer id) {
 
         taskMap.put(id, new Task(name, id, description, status));
     }
 
-    public void updateTask(String name,  String description, Status status, String oldName) {
+    public void updateTask(String name, String description, Status status, String oldName) {
         int id = getTaskIdByName(oldName);
         taskMap.put(id, new Task(name, id, description, status));
     }
@@ -54,9 +58,13 @@ public class TaskManager {
         taskMap.remove(id);
     }
 
+    public static Map<Integer, Epic> getEpicMap() {
+        return epicMap;
+    }
+
     public int getEpicIdByName(String name) {
         for (Epic epic : epicMap.values()) {
-            if (epic.name.equals(name)) {
+            if (epic.getName().equals(name)) {
                 return epic.getId();
             }
         }
@@ -70,10 +78,8 @@ public class TaskManager {
 
     public void updateEpic(String name, String description, int id) {
         List<Integer> subtasks = epicMap.get(id).getSubtasks();
-        List<Status> Status = epicMap.get(id).getStatus();
         epicMap.put(id, new Epic(name, id, description));
         epicMap.get(id).setSubtasks(subtasks);
-        epicMap.get(id).setStatuses(Status);
     }
 
     public void updateEpic(String name, String description, String oldName) {
@@ -101,9 +107,13 @@ public class TaskManager {
         deleteEpic(id);
     }
 
+    public static Map<Integer, Subtask> getSubtaskMap() {
+        return subtaskMap;
+    }
+
     public int getSubtaskIdByName(String name) {
         for (Subtask subtask : subtaskMap.values()) {
-            if (subtask.name.equals(name)) {
+            if (subtask.getName().equals(name)) {
                 return subtask.getId();
             }
         }
