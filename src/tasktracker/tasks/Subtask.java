@@ -1,6 +1,6 @@
-package taskTracker.tasks;
+package tasktracker.tasks;
 
-import taskTracker.Status;
+import tasktracker.Status;
 
 public class Subtask extends Task {
     private final int epicId;

@@ -1,6 +1,6 @@
-package taskTracker.tasks;
+package tasktracker.tasks;
 
-import taskTracker.Status;
+import tasktracker.Status;
 
 public class Task {
     protected String name; // public - т.к. мне нужен доступ к нему из TaskManager
